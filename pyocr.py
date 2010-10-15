@@ -1,6 +1,7 @@
 """ Main script for PyOCRKata """
 
 import sys
+import logging
 
 def main(argv):
 
@@ -12,7 +13,7 @@ def main(argv):
     try:
         file = open(filename)
     except IOError:
-        print "Error opening file %s" % filename
+        raise IOError("Error opening file %s" % filename)
 
 if __name__ == "__main__":
 
