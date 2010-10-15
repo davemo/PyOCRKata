@@ -1,0 +1,45 @@
+I was thinking a good approach to starting to read the data file would be to serialize it and break apart sections
+based on the offset defined in the problem (27 characters long per line / 3 characters per glyph data = 9 glyphs).
+
+For example, serializing the string would yield something like this for the 0 glyph:
+
+ _  _  _  _  _  _  _  _  _ | || || || || || || || || ||_||_||_||_||_||_||_||_||_|
+
+ Each glyph could then be further extracted by combining the corresponding location in the serialized string
+
+ ie: first glyph = chars [0,1,2] of the first 27 + [0,1,2] of the second 27 + [0,1,2] of the third 27
+
+ serializing the first glyph would look like:
+
+ _ | ||_|
+
+ These could then be stored in a python dictionary where the serialized glyph is the key for the proper numeric value:
+
+digit_map = {
+    " _ | ||_|" : 0, #etc....
+}
+
+A simple loop could extract the glyphs as found in the 3 lines, serialize them and do a lookup in this dictionary.
+
+Script usage:
+
+python pyocr.py data/accounts.txt
+    read in the file
+    split into a list of serialized accountNumbers
+        for each serialized accountNumber
+            create a placeholder called digit
+            loop for each glyph (9 total)
+                serialize that glyph in memory
+                lookup the key in the digit_map
+                if its valid
+                    add the value to digit
+                else
+                    add ? to digit
+                print digit to stdout
+
+
+TODO:
+
+0. Get testing framework sorted
+1. main method
+2. read file
