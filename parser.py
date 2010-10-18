@@ -1,20 +1,8 @@
 """ Utilities to parse the account digits """
 
 ACCOUNT_STRING_LINE_LENGTH = 27 # each line in an account string is 27 characters long
-ACCOUNT_STRING_NUM_LINES = 4    # each account number is represented on 4 lines, 3data + 1newline
+ACCOUNT_STRING_NUM_LINES = 3    # each account number is represented on 3 lines, the newline is stripped
 RAW_DIGIT_WIDTH = 3             # digits are 3 characters wide
-
-def parse_digit(account_string):
-    # given an account string across multiple lines
-    # strip the newline characters for this account string
-    account_string = account_string.replace("\n", "")
-    return account_string
-
-def parse_accounts(accounts_string):
-    # given a large string of accounts
-    pass
-
-
-
-
-
+ACCOUNT_DIGITS_COUNT = 9        # each account number is made up of 9 digits
+NEWLINE_CHARACTER = "\n"        # representation of the newline character in python
+EMPTY_CHARACTER = ""

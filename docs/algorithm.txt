@@ -36,10 +36,3 @@ python pyocr.py data/accounts.txt
                 else
                     add ? to digit
                 print digit to stdout
-
-
-TODO:
-
-0. Get testing framework sorted
-1. main method
-2. read file

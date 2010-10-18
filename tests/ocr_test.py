@@ -1,7 +1,9 @@
 from unittest import TestCase
 from pyocr import main
 
-import logging
+ZERO_SERIALIZED = " _ | ||_|"
+ZERO_UNSERIALIZED = " _ \n| |\n|_|\n"
+ZERO_ONE_ACCOUNT_LIST = " _ \n| |\n|_|\n\n   \n  |\n  |\n\n"
 
 class IOTest(TestCase):
 
@@ -17,19 +19,19 @@ class IOTest(TestCase):
 class ParseTest(TestCase):
 
     def setUp(self):
-        self.ZERO_SERIALIZED = " _ | ||_|"  # base case with zero to start
+        import parser
+        self.parser = parser
 
     def test_parse_digit_returns_proper_value(self):
-        import parser
-        zero_unserialized = " _ \n| |\n|_|\n"
-        parsed = parser.parse_digit(zero_unserialized)
-        self.assertEquals(parsed, self.ZERO_SERIALIZED)
+        parsed = self.parser.parse_digit(ZERO_UNSERIALIZED)
+        self.assertEquals(parsed, ZERO_SERIALIZED)
         
-    def test_serialize_accounts_returns_list(self):
-        import parser
-        zero_one_unserialized = " _ \n| |\n|_|\n   \n  |\n  |\n"
-        account_list = parser.parse_accounts(zero_one_unserialized)
+    def test_parse_accounts_returns_list(self):
+        account_list = self.parser.parse_accounts(ZERO_ONE_ACCOUNT_LIST)
         self.assertTrue(type(account_list) == list)
+
+    def test_parse_accounts_raises_error_when_accounts_are_formatted_improperly(self):
+        self.assertTrue(False)
 
 class OCRTest(TestCase):
 

@@ -1,7 +1,7 @@
 """ Main script for PyOCRKata """
 
 import sys
-import logging
+from models import AccountManager
 
 def main(argv):
 
@@ -11,7 +11,10 @@ def main(argv):
     filename = argv[1]
 
     try:
-        file = open(filename)
+        acm = AccountManager(open(filename))
+        for account in acm.accounts:
+            print account
+
     except IOError:
         raise IOError("Error opening file %s" % filename)
 
